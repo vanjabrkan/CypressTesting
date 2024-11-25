@@ -1,5 +1,5 @@
 import { navigateTo } from "../../support/pageObjects/navigation";
-import { onRegister } from '../../support/pageObjects/Register';
+import { onRegister } from '../../support/pageObjects/register';
 import { userData } from "../../support/commands";
 
 // This function accepts a test scenario description and test data as input
