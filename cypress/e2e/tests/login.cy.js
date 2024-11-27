@@ -14,13 +14,11 @@ describe('Login Tests', () => {
     const emailRegex = /^\S+@\S+\.\S+$/; // Regex to validate email format
 
     users.forEach(user => {
-        it(`should ${user.alert 
-            ? 'show error message for invalid credentials' 
-            : user.success 
-            ? 'log in successfully' 
+        it(`should ${user.success 
+            ? 'log in successfully for' 
             : user.email === ' ' && user.password === '' 
             ? 'show error message for empty fields' 
-            : 'validate email format'} for ${user.email}`, () => {
+            : 'show error message for'}  ${user.email}`, () => {
             onLogin.validateTheLoginPage(); // Validate the Login page
             onLogin.login(user.email, user.password);
 
@@ -33,6 +31,7 @@ describe('Login Tests', () => {
                 onLogin.validateInvalidCredentials(user.alert);
             } else {
                 onLogin.validateValidCredentials(user.success);
+                onLogin.logoutBtn();
             }
         });
     });

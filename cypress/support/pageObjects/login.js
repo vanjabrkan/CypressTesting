@@ -10,11 +10,11 @@ function fillInputField(fieldId, value) {
 export class LoginPage {
 
         // Method to fill out the registration form and submit it
-        login(email, password) {
-            fillInputField('email', email); // Fill the First Name field
-            fillInputField('pass', password); // Fill the Last Name field
-            cy.get('button[type="submit"][id="send2"][class="action login primary"]').click(); // Click the Submit button
-        }
+    login(email, password) {
+        fillInputField('email', email); // Fill the First Name field
+        fillInputField('pass', password); // Fill the Last Name field
+        cy.get('button[type="submit"][id="send2"][class="action login primary"]').click(); // Click the Submit button
+    }
 
     validateInvalidCredentials(expectedText) {
         cy.get('div[role="alert"]').should('contain', expectedText);
@@ -41,7 +41,17 @@ export class LoginPage {
         .should('have.text', 'New Customers'); // Verifies it contains the expected text
     }
 
-   
+    // Logout functionality
+    logoutBtn() {
+        cy.get('.page-header')
+            .find('.panel.header')
+            .find('span[class="customer-name"]').click();
+    
+            cy.get('.page-header')
+            .find('.panel.header')
+            .find('li[class="customer-welcome active"]')    
+            .find('li[class="authorization-link"]').contains('Sign Out').click() 
+    }
 
 }
 
