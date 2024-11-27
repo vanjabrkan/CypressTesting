@@ -52,7 +52,6 @@ export class LoginPage {
             .find('li[class="customer-welcome active"]')    
             .find('li[class="authorization-link"]').contains('Sign Out').click() 
     }
-
 }
 
 // Export a new instance of the LoginPage class

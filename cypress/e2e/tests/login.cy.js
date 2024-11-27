@@ -11,17 +11,19 @@ describe('Login Tests', () => {
         navigateTo.goToSignIn(); // Navigate to the "Sign In" page
     });
 
-    const emailRegex = /^\S+@\S+\.\S+$/; // Regex to validate email format
+    const emailRegex = /^\S+@\S+\.\S+$/; // Regular expression to validate email format
 
+    // Iterate through each user from the users.json file to test multiple scenarios
     users.forEach(user => {
         it(`should ${user.success 
-            ? 'log in successfully for' 
-            : user.email === ' ' && user.password === '' 
+            ? 'log in successfully for'   // Message for successful login
+            : user.email === ' ' && user.password === '' // Message for missing email/password
             ? 'show error message for empty fields' 
             : 'show error message for'}  ${user.email}`, () => {
             onLogin.validateTheLoginPage(); // Validate the Login page
             onLogin.login(user.email, user.password);
 
+            // Test case for both email and password fields being empty
             if (user.email === '' && user.password === '') {
                 onRegister.validateErrorMessageField('email-error', user.error);
                 onRegister.validateErrorMessageField('pass-error', user.error);
