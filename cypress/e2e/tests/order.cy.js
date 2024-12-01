@@ -6,12 +6,16 @@ describe('Cart Tests', () => {
     beforeEach('Open application and navigate to gear > watches', () => {
        cy.visit('/') // Open the homepage
        navigateTo.goToWatchesPage(); // Navigate to the "Sign In" page
-   });
+    });
 
-   it('Should be able to add product to cart', () => {
-    onOrder.validateTheOrderPage();
+    it('Should be able to add product to cart', () => {
+        onOrder.validateTheOrderPage();
+        onOrder.chooseTheProduct();
+        onOrder.addToCart();
+        onOrder.succesfullyAdded();
+        onOrder.goToCart();
 
-   })
+    })
 
 
 });
