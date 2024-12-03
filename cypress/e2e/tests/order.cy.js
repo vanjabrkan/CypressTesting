@@ -1,5 +1,6 @@
 import { navigateTo } from "../../support/pageObjects/navigation";
 import { onOrder } from "../../support/pageObjects/order";
+import { shippingData } from "../../support/commands";
 
 describe('Cart Tests', () => {
 
@@ -14,6 +15,10 @@ describe('Cart Tests', () => {
         onOrder.addToCart();
         onOrder.succesfullyAdded();
         onOrder.goToCart();
+        onOrder.proceedToCheckout();
+        onOrder.shipping({
+            ...shippingData // Use valid test data
+          });
 
     })
 
