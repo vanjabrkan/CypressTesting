@@ -1,9 +1,12 @@
-function fillInputField(fieldId, value) {
-    cy.get(`.control > input${fieldId}`, { timeout: 10000 }).clear(); // Clear the field to remove any existing text
+function fillInputFields(fieldId, value) {
+    cy.wait(1500);
+    cy.get(`input${fieldId}`).eq(0).clear(); // Clear the field to remove any existing text
     if (value) { // Check if a value is provided
-        cy.get(`.control > input${fieldId}`).type(value); // Type the value into the field
+        cy.get(`.control > input${fieldId}`).eq(0).type(value); // Type the value into the field
     }
 }
+
+
 
 export class OrderPage {
 
@@ -75,13 +78,33 @@ export class OrderPage {
         .find('[data-role="title"]')
         .should('contain', `Shipping Address`)
 
-        fillInputField('[name="firstname"]', firstName); // Fill the First Name field
-        fillInputField('[name="lastname"]', lastName); // Fill the Last Name field
-        fillInputField('[name="street[0]"]', address); // Fill the Street Address field
-        fillInputField('[name="city"]', city); // Fill the City field
-        fillInputField('[name="postcode"]', zip); // Fill the Zip Code field
-        fillInputField('[name="telephone"]', phone); // Fill the Telephone field  
+        fillInputFields('[id="customer-email"]', email); // Fill the Email field
+        fillInputFields('[name="firstname"]', firstName); // Fill the First Name field
+        fillInputFields('[name="lastname"]', lastName); // Fill the Last Name field
+        fillInputFields('[name="street[0]"]', address); // Fill the Street Address field
+        fillInputFields('[name="city"]', city); // Fill the City field
+        fillInputFields('[name="postcode"]', zip); // Fill the Zip Code field
+        cy.get('select[name="country_id"]').select('DE');
+        fillInputFields('[name="telephone"]', phone); // Fill the Telephone field
+
+        cy.get('button[type="submit"][data-role="opc-continue"]').click(); // Click the Submit button
     }
+
+    payment() {
+        cy.wait(1500);
+        cy.get('.payment-group [data-role="title"]')
+        .should('be.visible') 
+        .and('contain', 'Payment Method');  
+
+        cy.get('button[type="submit"][title="Place Order"]')
+        .should('be.visible') 
+        .click(); // Click the Submit button
+
+        cy.get('.page-title-wrapper [data-ui-id="page-title-wrapper"]')
+        .should('be.visible') 
+        .and('contain', 'Thank you for your purchase!');  
+    }
+
 }
 
 // This allows other test files to use this instance directly

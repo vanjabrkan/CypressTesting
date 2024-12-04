@@ -19,7 +19,7 @@ describe('Cart Tests', () => {
         onOrder.shipping({
             ...shippingData // Use valid test data
           });
-
+          onOrder.payment();
     })
 
 
