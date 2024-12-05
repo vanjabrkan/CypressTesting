@@ -1,15 +1,11 @@
 function fillInputFields(fieldId, value) {
-
     cy.get(`input${fieldId}`).eq(0).clear(); // Clear the field to remove any existing text
     if (value) { // Check if a value is provided
         cy.get(`.control > input${fieldId}`).eq(0).type(value); // Type the value into the field
     }
 }
 
-
-
 export class OrderPage {
-
         // Method to validate error messages for fields
     validateErrorMessageField(fieldId, errorMessage) {
         cy.get(`.${fieldId}`)  // Locate the error message element by its class
