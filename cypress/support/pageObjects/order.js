@@ -1,5 +1,5 @@
 function fillInputFields(fieldId, value) {
-    cy.wait(1500);
+
     cy.get(`input${fieldId}`).eq(0).clear(); // Clear the field to remove any existing text
     if (value) { // Check if a value is provided
         cy.get(`.control > input${fieldId}`).eq(0).type(value); // Type the value into the field
@@ -9,6 +9,13 @@ function fillInputFields(fieldId, value) {
 
 
 export class OrderPage {
+
+        // Method to validate error messages for fields
+    validateErrorMessageField(fieldId, errorMessage) {
+        cy.get(`.${fieldId}`)  // Locate the error message element by its class
+            .should('be.visible') // Ensure the error message is visible
+            .and('include.text', errorMessage); // validate partial text
+    }
 
     validateTheOrderPage() {
         cy.get('.page-title-wrapper [data-ui-id="page-title-wrapper"]')
@@ -66,6 +73,7 @@ export class OrderPage {
 
     proceedToCheckout() {
         cy.wait(1500);
+        cy.url().should('include', 'checkout/cart/')
         cy.get('.cart-summary')
             .find('[data-role="proceed-to-checkout"]')
             .should('contain', `Proceed to Checkout`)
@@ -74,6 +82,7 @@ export class OrderPage {
 
     shipping({ firstName, lastName, email, address, city, zip, phone }) {
         cy.wait(1500);
+        cy.url().should('include', 'checkout/#shipping')
         cy.get('#shipping')
         .find('[data-role="title"]')
         .should('contain', `Shipping Address`)
@@ -85,6 +94,7 @@ export class OrderPage {
         fillInputFields('[name="city"]', city); // Fill the City field
         fillInputFields('[name="postcode"]', zip); // Fill the Zip Code field
         cy.get('select[name="country_id"]').select('DE');
+        cy.wait(1500);
         fillInputFields('[name="telephone"]', phone); // Fill the Telephone field
 
         cy.get('button[type="submit"][data-role="opc-continue"]').click(); // Click the Submit button
@@ -92,6 +102,7 @@ export class OrderPage {
 
     payment() {
         cy.wait(1500);
+        cy.url().should('include', 'checkout/#payment')
         cy.get('.payment-group [data-role="title"]')
         .should('be.visible') 
         .and('contain', 'Payment Method');  
