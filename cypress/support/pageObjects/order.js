@@ -19,23 +19,23 @@ export class OrderPage {
 
     validateTheOrderPage() {
         cy.get('.page-title-wrapper [data-ui-id="page-title-wrapper"]')
-        .should('be.visible') 
-        .and('contain', 'Watches');  
+            .should('be.visible') 
+            .and('contain', 'Watches');  
     }
 
     chooseTheProduct() {
     // Find all products and select the eighth one (index 7)
         cy.get('.products .product-item')
-        .eq(7) // Index 7 corresponds to the eighth element
-        .within(() => {
-            cy.get('.product-item-name a')
-                .should('be.visible')
-                .click() // Perform the click action
-                .invoke('text') // Extract the product name
-                .as('productName')
-                .then((text) => {
-                     cy.log('The name of the eighth product is: ' + text.trim());
-                });
+            .eq(7) // Index 7 corresponds to the eighth element
+            .within(() => {
+                cy.get('.product-item-name a')
+                    .should('be.visible')
+                    .click() // Perform the click action
+                    .invoke('text') // Extract the product name
+                    .as('productName')
+                    .then((text) => {
+                        cy.log('The name of the eighth product is: ' + text.trim());
+                    });
         });
     }
 
@@ -84,8 +84,8 @@ export class OrderPage {
         cy.wait(1500);
         cy.url().should('include', 'checkout/#shipping')
         cy.get('#shipping')
-        .find('[data-role="title"]')
-        .should('contain', `Shipping Address`)
+            .find('[data-role="title"]')
+            .should('contain', `Shipping Address`)
 
         fillInputFields('[id="customer-email"]', email); // Fill the Email field
         fillInputFields('[name="firstname"]', firstName); // Fill the First Name field
@@ -96,7 +96,6 @@ export class OrderPage {
         cy.get('select[name="country_id"]').select('DE');
         cy.wait(1500);
         fillInputFields('[name="telephone"]', phone); // Fill the Telephone field
-
         cy.get('button[type="submit"][data-role="opc-continue"]').click(); // Click the Submit button
     }
 
@@ -104,16 +103,16 @@ export class OrderPage {
         cy.wait(1500);
         cy.url().should('include', 'checkout/#payment')
         cy.get('.payment-group [data-role="title"]')
-        .should('be.visible') 
-        .and('contain', 'Payment Method');  
+            .should('be.visible') 
+            .and('contain', 'Payment Method');  
 
         cy.get('button[type="submit"][title="Place Order"]')
-        .should('be.visible') 
-        .click(); // Click the Submit button
+            .should('be.visible') 
+            .click(); // Click the Submit button
 
         cy.get('.page-title-wrapper [data-ui-id="page-title-wrapper"]')
-        .should('be.visible') 
-        .and('contain', 'Thank you for your purchase!');  
+            .should('be.visible') 
+            .and('contain', 'Thank you for your purchase!');  
     }
 
 }

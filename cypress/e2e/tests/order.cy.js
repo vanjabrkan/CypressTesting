@@ -9,7 +9,6 @@ describe('Order Tests', () => {
        navigateTo.goToWatchesPage(); // Navigate to the "Sign In" page
     });
 
-    
     it('Order is not placed', () => {
         onOrder.validateTheOrderPage();
         onOrder.chooseTheProduct();
@@ -34,10 +33,8 @@ describe('Order Tests', () => {
         onOrder.shipping({
             ...shippingData // Use valid test data
           });
-          onOrder.payment();
+        onOrder.payment();
     })
-
-
 
 });
 

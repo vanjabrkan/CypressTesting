@@ -29,16 +29,16 @@ export class LoginPage {
     validateTheLoginPage() {
         // Verify the page title is visible and contains the correct text
         cy.get('.page-title-wrapper [data-ui-id="page-title-wrapper"]')
-        .should('be.visible') // Ensure the element is visible
-        .and('contain', 'Customer Login');  // Verify the title contains the expected text
+            .should('be.visible') // Ensure the element is visible
+            .and('contain', 'Customer Login');  // Verify the title contains the expected text
 
         // Validate that the "Registered Customers" heading is displayed
         cy.get('.block-title > strong[id="block-customer-login-heading"]')  // Find the <strong> HTML element with the id "block-customer-login-heading"
-        .should('have.text', 'Registered Customers'); // Verifies it contains the expected text
+            .should('have.text', 'Registered Customers'); // Verifies it contains the expected text
 
         // Validate that the "New Customers" heading is displayed
         cy.get('strong[id="block-new-customer-heading"]')  // Find the <strong> HTML element with the id "block-new-customer-heading"
-        .should('have.text', 'New Customers'); // Verifies it contains the expected text
+            .should('have.text', 'New Customers'); // Verifies it contains the expected text
     }
 
     // Logout functionality
@@ -47,7 +47,7 @@ export class LoginPage {
             .find('.panel.header')
             .find('span[class="customer-name"]').click();
     
-            cy.get('.page-header')
+        cy.get('.page-header')
             .find('.panel.header')
             .find('li[class="customer-welcome active"]')    
             .find('li[class="authorization-link"]').contains('Sign Out').click() 
