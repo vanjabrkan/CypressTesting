@@ -25,3 +25,21 @@ Follow these steps to set up the project locally:
    ```bash
    git clone <repository-url>
    cd <repository-name>
+
+2. **Install Cypress**:
+   ```bash
+   npm install cypress --save-dev
+
+## Running Tests
+
+```bash
+npx cypress open
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
