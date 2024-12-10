@@ -47,6 +47,7 @@ export class OrderPage {
             .should('exist') // Ensure the alert exists
             .should('be.visible')
             .then(() => {
+                cy.wait(1500);
                 cy.get('@productName').then((name) => {
                     cy.get('[role="alert"]')
                         .should('contain', `You added ${name.trim()} to your shopping cart.`); // Verifikuje tačan naziv proizvoda
